@@ -16,6 +16,7 @@ class ReservasiReguler extends Reservasi
         $tipeBackground,
         $cetakFotoLembar
     ) {
+
         parent::__construct(
             $idReservasi,
             $namaPelanggan,
@@ -30,24 +31,16 @@ class ReservasiReguler extends Reservasi
 
     public function hitungTotalBiaya()
     {
-        return $this->durasiJam * $this->tarifDasarPerJam;
+        return ($this->durasiJam * $this->tarifDasarPerJam) + 50000;
     }
 
-    public function tampilDetailReservasi()
+    public function selectWhere($koneksi, $idReservasi)
     {
-        return "Reservasi Reguler";
-    }
+        $query = "SELECT * FROM table_reservasi
+                  WHERE id_reservasi = '$idReservasi'
+                  AND jenis_paket = 'reguler'";
 
-    public function selectWhere($conn, $idReservasi)
-    {
-        $query = "
-            SELECT *
-            FROM table_reservasi
-            WHERE id_reservasi = '$idReservasi'
-            AND jenis_paket = 'reguler'
-        ";
-
-        return mysqli_query($conn, $query);
+        return mysqli_query($koneksi, $query);
     }
 }
 

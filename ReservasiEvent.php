@@ -16,6 +16,7 @@ class ReservasiEvent extends Reservasi
         $namaLokasiLuar,
         $biayaTransportasiTim
     ) {
+
         parent::__construct(
             $idReservasi,
             $namaPelanggan,
@@ -31,24 +32,16 @@ class ReservasiEvent extends Reservasi
     public function hitungTotalBiaya()
     {
         return ($this->durasiJam * $this->tarifDasarPerJam)
-                + $this->biayaTransportasiTim;
+            + $this->biayaTransportasiTim;
     }
 
-    public function tampilDetailReservasi()
+    public function selectWhere($koneksi, $idReservasi)
     {
-        return "Reservasi Event";
-    }
+        $query = "SELECT * FROM table_reservasi
+                  WHERE id_reservasi = '$idReservasi'
+                  AND jenis_paket = 'event'";
 
-    public function selectWhere($conn, $idReservasi)
-    {
-        $query = "
-            SELECT *
-            FROM table_reservasi
-            WHERE id_reservasi = '$idReservasi'
-            AND jenis_paket = 'event'
-        ";
-
-        return mysqli_query($conn, $query);
+        return mysqli_query($koneksi, $query);
     }
 }
 

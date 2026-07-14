@@ -15,6 +15,7 @@ abstract class Reservasi
         $durasiJam,
         $tarifDasarPerJam
     ) {
+
         $this->idReservasi = $idReservasi;
         $this->namaPelanggan = $namaPelanggan;
         $this->tanggalBooking = $tanggalBooking;
@@ -47,10 +48,9 @@ abstract class Reservasi
         return $this->tarifDasarPerJam;
     }
 
-    // Method abstract yang wajib diimplementasikan
     abstract public function hitungTotalBiaya();
 
-    abstract public function tampilDetailReservasi();
+    abstract public function selectWhere($koneksi, $idReservasi);
 }
 
 ?>

@@ -16,6 +16,7 @@ class ReservasiPremium extends Reservasi
         $kuotaTalentOrang,
         $layananMakeup
     ) {
+
         parent::__construct(
             $idReservasi,
             $namaPelanggan,
@@ -30,24 +31,16 @@ class ReservasiPremium extends Reservasi
 
     public function hitungTotalBiaya()
     {
-        return $this->durasiJam * $this->tarifDasarPerJam;
+        return ($this->durasiJam * $this->tarifDasarPerJam) * 1.20;
     }
 
-    public function tampilDetailReservasi()
+    public function selectWhere($koneksi, $idReservasi)
     {
-        return "Reservasi Premium";
-    }
+        $query = "SELECT * FROM table_reservasi
+                  WHERE id_reservasi = '$idReservasi'
+                  AND jenis_paket = 'premium'";
 
-    public function selectWhere($conn, $idReservasi)
-    {
-        $query = "
-            SELECT *
-            FROM table_reservasi
-            WHERE id_reservasi = '$idReservasi'
-            AND jenis_paket = 'premium'
-        ";
-
-        return mysqli_query($conn, $query);
+        return mysqli_query($koneksi, $query);
     }
 }
 
