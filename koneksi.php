@@ -1,13 +1,13 @@
 <?php
 
-$conn = mysqli_connect(
+$koneksi = mysqli_connect(
     "localhost",
     "root",
     "",
     "DB_REMEDI_PBO_TRPL1A_GilangRinakitWisnuAdhityaSumirat"
 );
 
-if (!$conn) {
+if (!$koneksi) {
     die("Koneksi gagal: " . mysqli_connect_error());
 }
 
